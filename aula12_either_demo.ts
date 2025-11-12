@@ -13,29 +13,29 @@ function diviteTwoIfEven(num: number): number {
 //console.log(diviteTwoIfEven(0));
 //console.log(diviteTwoIfEven(3));
 
-type Either<E, A> = Left<E> | Right<A>;
+export type Either<E, A> = Left<E> | Right<A>;
 
-interface Left<E> {
+export interface Left<E> {
     _tag: "Left";
     left: E;
 }
 
-interface Right<A> {
+export interface Right<A> {
     _tag: "Right";
     right: A;
 }
 
-const left = <E, A = never>(e: E): Either<E, A> => ({
+export const left = <E, A = never>(e: E): Either<E, A> => ({
     _tag: "Left",
     left: e,
 });
 
-const right = <A, E = never>(a: A): Either<E, A> => ({
+export const right = <A, E = never>(a: A): Either<E, A> => ({
     _tag: "Right",
     right: a,
 });
 
-const isLeft = <E, A>(x: Either<E, A>): x is Left<E> => x._tag === "Left";
+export const isLeft = <E, A>(x: Either<E, A>): x is Left<E> => x._tag === "Left";
 
 function diviteTwoIfEven2(num: number): Either<string, number> {
     if (num === 0) {
@@ -63,20 +63,10 @@ const composed = compose(
 //console.log(composed(0));
 //console.log(composed(3));
 
-type Match = <E, A, B>(
+export type Match = <E, A, B>(
     onLeft: (e: E) => B,
     onRight: (a: A) => B,
 ) => (x: Either<E, A>) => B;
 
-const match: Match = (onLeft, onRight) => (x) =>
+export const match: Match = (onLeft, onRight) => (x) =>
     isLeft(x) ? onLeft(x.left) : onRight(x.right);
-
-export {
-    Either,
-    Left,
-    Right,
-    left,
-    right,
-    isLeft,
-    match
-}
