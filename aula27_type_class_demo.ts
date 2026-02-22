@@ -15,11 +15,11 @@ import {
 
 declare module "fp-ts/HKT" {
   interface URItoKind<A> {
-    "List": List<A>;
-    "Option": Option<A>;
+    List: List<A>;
+    Option: Option<A>;
   }
   interface URItoKind2<E, A> {
-    "Either": Either<E, A>;
+    Either: Either<E, A>;
   }
 }
 
@@ -54,6 +54,7 @@ const eitherFunctor: Functor2<"Either"> = {
       (a) => right(f(a)),
     ),
 };
+
 function lift<F extends URIS2>(
   F: Functor2<F>,
 ): <E, A, B>(f: (x: A) => B) => (fa: Kind2<F, E, A>) => Kind2<F, E, B>;
@@ -73,3 +74,8 @@ const liftIncrement = lift(optionFunctor)(increment);
 
 console.log(liftIncrement(some(2)));
 console.log(liftIncrement(none));
+
+const liftIncrement2 = lift(eitherFunctor)(increment);
+
+console.log(liftIncrement2(right(12)));
+console.log(liftIncrement2(left("error")));

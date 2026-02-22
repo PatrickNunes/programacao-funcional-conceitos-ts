@@ -1,0 +1,25 @@
+// Folder-specific settings
+//
+// For a full list of overridable settings, and general information on folder-specific settings,
+// see the documentation: https://zed.dev/docs/configuring-zed#settings-files
+{
+  "lsp": {
+    "deno": {
+      "settings": {
+        "deno": {
+          "enable": true,
+          "lint": true,
+          "unstable": false // Mude para true se usar recursos instáveis
+        }
+      }
+    }
+  },
+  "languages": {
+    "TypeScript": {
+      "language_servers": ["deno", "!typescript-language-server", "!vtsls"]
+    },
+    "TSX": {
+      "language_servers": ["deno", "!typescript-language-server", "!vtsls"]
+    }
+  }
+}
